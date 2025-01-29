@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>¿Quieres ser mi San Valentín?</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: #ffe6e6;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      margin: 0;
+    }
+    /* Estilo del cronómetro */
+    .countdown {
+      font-size: 2em;
+      background-color: red;
+      color: white;
+      padding: 10px 20px;
+      border-radius: 10px;
+      display: inline-block;
+      font-family: 'Courier New', monospace;
+      margin-bottom: 20px; /* Espacio debajo del reloj */
+    }
+    h1 {
+      color: #ff5c5c;
+      font-size: 2.5em;
+      text-align: center;
+    }
+    p {
+      color: #333;
+      font-size: 1.2em;
+      text-align: center;
+      margin: 10px 20px;
+    }
+    .button-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      margin-top: 20px;
+    }
+    .button {
+      background-color: #ff5c5c;
+      color: white;
+      border: none;
+      padding: 12px 20px;
+      font-size: 1em;
+      border-radius: 30px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+      width: 250px;
+      text-align: center;
+    }
+    .button:hover {
+      background-color: #e64949;
+    }
+    .heart {
+      font-size: 5em;
+      color: #ff5c5c;
+      animation: heartbeat 1s infinite;
+    }
+    @keyframes heartbeat {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.2); }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Cronómetro ahora está hasta arriba -->
+  <div class="countdown" id="countdown">00:00:00:00</div>
+
+  <h1>¿Quieres ser mi San Valentín? 🤍</h1>
+  <p>Porque cada día a tu lado es especial, pero este 14 de Febrero tiene más de 1 significado para nosotros, te amo mil millones</p>
+
+  <div class="heart">🤍</div>
+  <div class="button-container">
+    <button class="button" onclick="yesValentine()">¡Sí, Obviamente Alansiñooo! 😊</button>
+    <button class="button" onclick="noValentine()">Lo pensaré, sigue participando 🤔</button>
+    <button class="button" onclick="doubtsValentine()">Tengo mis dudas 🤨</button>
+  </div>
+
+  <!-- Script de confetti -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti"></script>
+  
+  <script>
+    function yesValentine() {
+      confetti();
+      setTimeout(function() {
+        alert("¡Sabía que dirías que sí Jimena Breton Rodriguez! Eres lo mejor de mi vida. Te amo mi niña hermosa🤍");
+      }, 500);
+    }
+
+    function noValentine() {
+      alert("No importa, aún así me haces feliz cada día. 😊");
+    }
+
+    function doubtsValentine() {
+      alert("Mi Amoooooor, razones para decir que sí:\n\n- Porque eres tu el amor de mi vida 🤍\n- Porque cada día contigo es especial🤍 \n- Porque haré todo para hacerte feliz siempre 🤍\n- Porque eres la mejor persona que conozco 🤍\n- Porque este San Valentín y los que faltan quiero que sean contigo 🤍 \n- Porque TE AMOOOOOO🤍");
+    }
+
+    function updateCountdown() {
+      const now = new Date();
+      const targetDate = new Date(now.getFullYear(), 1, 14, 0, 0, 0); // 14 de febrero a las 00:00:00
+
+      if (now > targetDate) {
+        targetDate.setFullYear(now.getFullYear() + 1);
+      }
+
+      const diff = targetDate - now;
+      const days = String(Math.floor(diff / (1000 * 60 * 60 * 24))).padStart(2, '0');
+      const hours = String(Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))).padStart(2, '0');
+      const minutes = String(Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60))).padStart(2, '0');
+      const seconds = String(Math.floor((diff % (1000 * 60)) / 1000)).padStart(2, '0');
+
+      document.getElementById("countdown").innerText = `${days}:${hours}:${minutes}:${seconds}`;
+
+      if (diff <= 0) {
+        document.getElementById("countdown").innerText = "00:00:00:00";
+        alert("¡Feliz San Valentín, mi amor! 🎉💖");
+        confetti();
+      }
+    }
+
+    setInterval(updateCountdown, 1000);
+    updateCountdown();
+  </script>
+
+</body>
+</html>
